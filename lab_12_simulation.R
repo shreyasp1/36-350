@@ -13,3 +13,14 @@ model_select = function(cov, resp, cutoff){
   
 }
 
+run_simulation = function(n_trials, n, p ,cutoff){
+  all.p.vals = numeric(0)
+  for(i in 1:n_trials){
+    data = generate_data(n,p)
+    p_val = model_select(data$matrix, data$responses, cutoff)
+    all.p.vals = c(all.p.vals, p_val)
+  }
+  hist(all.p.vals)
+  
+}
+
