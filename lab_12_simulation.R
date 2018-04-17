@@ -16,15 +16,13 @@ model_select = function(cov, resp, cutoff){
 run_simulation = function(n_trials, n, p ,cutoff){
   all.p.vals = numeric(0)
   for(i in 1:n_trials){
-    data = generate_data(n,p)
+    data = generate_data(n[i],p[i])
     p_val = model_select(data$matrix, data$responses, cutoff)
     all.p.vals = c(all.p.vals, p_val)
   }
-  write(all.p.vals, file = "p_vals.txt")
+  hist(all.p.vals)
 }
 
-make_plot = function(datapath){
-  s = readLines(datapath)
-  p.vals = as.numeric(strsplit(s, split = " ")[[1]])
-  hist(p.vals)
-}
+run_simulation(3, c(100,1000,10000), c(10,20,50), 0.05)
+
+
