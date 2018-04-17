@@ -20,7 +20,11 @@ run_simulation = function(n_trials, n, p ,cutoff){
     p_val = model_select(data$matrix, data$responses, cutoff)
     all.p.vals = c(all.p.vals, p_val)
   }
-  hist(all.p.vals)
-  
+  write(all.p.vals, file = "p_vals.txt")
 }
 
+make_plot = function(datapath){
+  s = readLines(datapath)
+  p.vals = as.numeric(strsplit(s, split = " ")[[1]])
+  hist(p.vals)
+}
